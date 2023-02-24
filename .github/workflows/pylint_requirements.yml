@@ -1,6 +1,8 @@
 name: Pylint
 
-on: [push]
+on: 
+  push:
+    branches: [i190555]
 
 jobs:
   build:
