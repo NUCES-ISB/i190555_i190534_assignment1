@@ -1,9 +1,8 @@
 name: CodeQL Repo Analysis
-
 on:
   push:
     branches:
-      - main  
+      - i190555  
   schedule:
     - cron: '0 * * * *'
 
