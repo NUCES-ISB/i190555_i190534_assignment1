@@ -1,0 +1,1 @@
+An analysis of the code was performed using the code security tool, Code QL. The code scan found diagnostic data that successfully 13 Python files were extracted upon the push action. Further, some metric data that was found includes that the CodeQL database has a total of 1069702 lines, from which 1323 lines are the user written Python code.
