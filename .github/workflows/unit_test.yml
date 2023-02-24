@@ -1,0 +1,15 @@
+name: Unit Tests
+on:
+  push:
+    branches: ["i190555"]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m unittest tests/test_yake.py
