@@ -1,0 +1,11 @@
+name: Jenkins Build
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins build
+        env:
+          JENKINS_URL: http://192.168.100.26:8080/github-webhook/
+        run: curl -X POST -v -u ${{ secrets.JENKINS_CREDENTIALS }} "${JENKINS_URL}/build"
