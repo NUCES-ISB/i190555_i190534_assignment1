@@ -1,31 +1,27 @@
-name: Code test for security
-on: [push]
-  branches: [i190555]
-jobs:
-  code-ql test
+name: CodeQL Repo Analysis
 
+on:
+  push:
+    branches:
+      - main  
   schedule:
-    #        ┌───────────── minute (0 - 59)
-    #        │  ┌───────────── hour (0 - 23)
-    #        │  │ ┌───────────── day of the month (1 - 31)
-    #        │  │ │ ┌───────────── month (1 - 12 or JAN-DEC)
-    #        │  │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
-    #        │  │ │ │ │
-    #        │  │ │ │ │
-    #        │  │ │ │ │
-    #        *  * * * *
-    - cron: '30 1 * * 0'
+    - cron: '0 * * * *'
 
 jobs:
-  CodeQL-Build:
+  analyze:
+    name: Analyze code with CodeQL
     runs-on: ubuntu-latest
-    permissions:
-      # required for all workflows
-      security-events: write
-      # Initializes the CodeQL tools for scanning.
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+    strategy:
+      matrix:
+        language: [python]
+        python-version: [3.8]        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+        python-version: ${{ matrix.python-version }}        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
